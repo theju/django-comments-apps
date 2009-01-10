@@ -49,15 +49,20 @@ class ThreadedCommentForm(CommentForm):
         and a (unix) timestamp.
         """
 
+        if self.parent:
+            parent = str(parent)
+        else:
+            parent = ""
+
         initial_security_dict = {
             'content_type' : str(self.target_object._meta),
             'object_pk'    : str(self.target_object._get_pk_val()),
             'timestamp'    : str(timestamp),
-            'parent'       : self.parent or "",
+            'parent'       : parent,
           }
         return self.generate_security_hash(**initial_security_dict)
 
-    def generate_security_hash(self, content_type, object_pk, timestamp):
+    def generate_security_hash(self, content_type, object_pk, timestamp, parent):
         """Generate a (SHA1) security hash from the provided info."""
         info = (content_type, object_pk, timestamp, parent, settings.SECRET_KEY)
         return sha_constructor("".join(info)).hexdigest()
