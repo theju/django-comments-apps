@@ -50,7 +50,7 @@ class ThreadedCommentForm(CommentForm):
         """
 
         if self.parent:
-            parent = str(parent)
+            parent = str(self.parent)
         else:
             parent = ""
 
