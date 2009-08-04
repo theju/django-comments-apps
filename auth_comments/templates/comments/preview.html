@@ -1,0 +1,38 @@
+{% extends "comments/base.html" %}
+{% load comments %}
+{% load i18n %}
+
+{% block title %}{% trans "Preview your comment" %}{% endblock %}
+
+{% block content %}
+
+<h2>{% trans "Preview your comment" %}</h2>
+
+<blockquote>{{ comment|linebreaks }}</blockquote>
+
+<form action="{% comment_form_target %}" method="POST">
+<p>
+  {% trans "and" %} 
+  <input type="submit" name="submit" class="submit-post" value="{% trans "Post your comment" %}" /> 
+  {% trans "or make changes" %}:
+</p>
+  {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+  {{ form.comment }}
+  {{ form.content_type }}
+  {{ form.object_pk }}
+  {{ form.timestamp }}
+  {{ form.security_hash }}
+
+  {% if form.errors %}
+  <p class="error">
+  {{ form.errors }}
+  </p>
+  {% endif %}
+
+  <p class="submit">
+    <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+    <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+  </p>
+</form>
+
+{% endblock %}

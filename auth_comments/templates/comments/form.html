@@ -1,0 +1,14 @@
+{% load comments %}
+{% load i18n %}
+
+<form action="{% comment_form_target %}" method="POST">
+  {{ form.comment }}
+  {{ form.content_type }}
+  {{ form.object_pk }}
+  {{ form.timestamp }}
+  {{ form.security_hash }}
+  <p class="submit">
+    <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+    <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+  </p>
+</form>
