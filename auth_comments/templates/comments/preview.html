@@ -10,7 +10,7 @@
 
 <blockquote>{{ comment|linebreaks }}</blockquote>
 
-<form action="{% comment_form_target %}" method="POST">
+<form action="{% comment_form_target %}" method="POST">{% csrf_token %}
 <p>
   {% trans "and" %} 
   <input type="submit" name="submit" class="submit-post" value="{% trans "Post your comment" %}" /> 
