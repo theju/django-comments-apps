@@ -1,7 +1,7 @@
 {% load comments %}
 {% load i18n %}
 
-<form action="{% comment_form_target %}" method="POST">
+<form action="{% comment_form_target %}" method="POST">{% csrf_token %}
   {{ form.comment }}
   {{ form.content_type }}
   {{ form.object_pk }}
