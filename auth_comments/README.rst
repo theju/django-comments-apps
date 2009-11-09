@@ -17,13 +17,20 @@ INSTALL
 
     (r'^comment/', include('django.contrib.comments.urls')),
 
+* Add the ``ReRenderMiddleware`` to the ``MIDDLEWARE_CLASSES`` in ``settings.py``::
+
+    MIDDLEWARE_CLASSES = (
+    ...
+    'recaptcha_comments.middleware.ReRenderMiddleware',
+    )
+
 * In your templates, when you want to render the authenticated comment form, just use the following code::
 
     {% load auth_comments %}
     ...
     {% render_auth_comment_form for app.model object_pk %}
 
-This code is equivalent to::
+  This code is equivalent to::
 
     {% if request.user.is_authenticated %}
       {% render_comment_form for app.model object_pk %}
