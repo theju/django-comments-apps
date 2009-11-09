@@ -8,3 +8,4 @@ class RecaptchaCommentForm(CommentForm):
         if not 'preview' in self.data:
             captcha_data = self.cleaned_data['captcha']
             return self.fields['captcha'].verify(captcha_data)
+        return self.cleaned_data['captcha']
