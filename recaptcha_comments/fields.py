@@ -36,7 +36,7 @@ class RecaptchaField(forms.Field):
                               "recaptcha-not-reachable": _("The reCaptcha site seems to be down. Sorry!!!")}
     widget = RecaptchaWidget
 
-    def clean(self, data):
+    def verify(self, data):
         captcha_req = urllib2.Request(VERIFY_SERVER,
                                       data=urllib.urlencode({'privatekey': settings.RECAPTCHA_PRIVATE_KEY,
                                                              'remoteip'  : data['remoteip'],
