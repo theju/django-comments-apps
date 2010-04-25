@@ -5,4 +5,5 @@ class RecaptchaCommentForm(CommentForm):
     captcha = RecaptchaField()
 
     def clean_captcha(self):
-        return self.fields['captcha'].verify(self.cleaned_data['captcha'])
+        self.fields['captcha'].verify(self.cleaned_data['captcha'])
+        return self.cleaned_data['captcha']
