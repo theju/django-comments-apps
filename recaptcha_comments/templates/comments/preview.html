@@ -21,8 +21,7 @@
           {% if field.errors %} class="error"{% endif %}
           {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
           {% if field.errors %}{{ field.errors }}{% endif %}
-          {{ field.label_tag }}
-	  {% ifequal field.name "captcha" %}{{ field|safe }}{% else %}{{ field }}{% endifequal %}
+	  {% ifequal field.name "captcha" %}{% if form.errors %}{{ field.label_tag }}{{ field|safe }}{% endif %}{% else %}{{ field.label_tag }}{{ field }}{% endifequal %}
         </p>
       {% endif %}
     {% endfor %}

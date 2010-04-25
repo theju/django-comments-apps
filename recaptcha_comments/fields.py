@@ -50,4 +50,4 @@ class RecaptchaField(forms.Field):
         return_code = resp_content[0].strip()
         error = resp_content[1].strip()
         if not return_code == "true":
-            raise forms.ValidationError(self.error_messages[error])
+            raise forms.ValidationError(self.error_messages.get(error) or error)
